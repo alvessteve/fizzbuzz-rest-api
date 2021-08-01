@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <property resource="logging.properties"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- ###################################################### -->
+    <!-- # Expose Spring property to logback system -->
+    <!-- ###################################################### -->
+    <springProperty scope="context" name="logging.level.root" source="logging.level.root" defaultValue="INFO"/>
+    <springProperty scope="context" name="logging.file.path" source="logging.file.path"/>
+    <springProperty scope="context" name="logging.file.name" source="logging.file.name"/>
+    <springProperty scope="context" name="logging.pattern.console" source="logging.pattern.console"/>
+    <springProperty scope="context" name="logging.pattern.file" source="logging.pattern.file"/>
+    <property name="log.dev.pattern"
+              value="fizzbuzz [%thread] %d{${logging.pattern.dateformat:-dd/MM/yyyy HH:mm:ss.SSS}} %-5level %logger{36} - %X{component.id} : - {%X{message.id}} %msg%n"/>
+    <!-- ###################################################### -->
+    <!-- # Define log appenders -->
+    <!-- ###################################################### -->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${logging.pattern.console}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.file.name}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logging.file.path}/ArchivedAppLogs/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${logging.file.max-size}</maxFileSize>
+            <maxHistory>${logging.file.max-history}</maxHistory>
+            <totalSizeCap>${logging.file.total-size-cap}</totalSizeCap>
+            <cleanHistoryOnStart>${logging.file.clean-history-on-start}</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logging.pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_LOGGING_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="ROLLING_FILE"/>
+    </appender>
+
+    <!-- ###################################################### -->
+    <!-- # Logger to be used in order to store  application's logs -->
+    <!-- ###################################################### -->
+    <logger name="org.springframework" level="${logging.level.org.springframework}" additivity="false">
+        <appender-ref ref="ASYNC_STDOUT"/>
+        <appender-ref ref="ASYNC_LOGGING_FILE"/>
+    </logger>
+
+    <!-- ###################################################### -->
+    <!-- # Level and appenders configuration -->
+    <!-- ###################################################### -->
+    <root level="ERROR">
+        <appender-ref ref="ASYNC_LOGGING_FILE"/>
+        <appender-ref ref="ASYNC_STDOUT"/>
+    </root>
+
+    <root level="DEBUG">
+        <appender-ref ref="ASYNC_LOGGING_FILE"/>
+    </root>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_STDOUT"/>
+    </root>
+</configuration>
