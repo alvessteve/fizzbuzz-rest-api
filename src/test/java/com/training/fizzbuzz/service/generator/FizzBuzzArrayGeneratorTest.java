@@ -19,7 +19,7 @@ class FizzBuzzArrayGeneratorTest {
 
         FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(3, 5, 16, "fizz", "buzz");
 
-        assertThat(fizzBuzzArray.getResult()).isEqualTo(result);
+        assertThat(fizzBuzzArray.result()).isEqualTo(result);
     }
 
     @Test
@@ -42,7 +42,7 @@ class FizzBuzzArrayGeneratorTest {
     public void should_return_empty_array_if_limit_is_zero() {
         FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(3, 5, 0, "fizz", "buzz");
 
-        assertThat(fizzBuzzArray.getResult()).isEqualTo(Collections.emptyList());
+        assertThat(fizzBuzzArray.result()).isEqualTo(Collections.emptyList());
     }
 
 }
