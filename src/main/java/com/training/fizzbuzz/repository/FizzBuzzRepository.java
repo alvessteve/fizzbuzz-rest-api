@@ -1,15 +1,15 @@
 package com.training.fizzbuzz.repository;
 
-import com.training.fizzbuzz.repository.entity.FizzbuzzRequestStatisticsEntity;
+import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 
 import java.util.Optional;
 
 public interface FizzBuzzRepository {
-    Optional<FizzbuzzRequestStatisticsEntity> findById(int hashCode);
+    Optional<FizzBuzzRequestStatistic> findById(int hashCode);
 
-    void save(FizzbuzzRequestStatisticsEntity fizzbuzzRequestStatisticsEntity);
+    void save(FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity);
 
-    Optional<FizzbuzzRequestStatisticsEntity> findMostCalled();
+    Optional<FizzBuzzRequestStatistic> findMostCalled();
 
     void clean();
 }
