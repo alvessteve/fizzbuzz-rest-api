@@ -1,6 +1,6 @@
 package com.training.fizzbuzz.repository;
 
-import com.training.fizzbuzz.repository.entity.FizzbuzzRequestStatisticsEntity;
+import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -11,35 +11,35 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class InMemoryFizzBuzzRepository implements FizzBuzzRepository {
 
-    private ConcurrentHashMap<Integer, FizzbuzzRequestStatisticsEntity> occurences;
+    private ConcurrentHashMap<Integer, FizzBuzzRequestStatistic> occurences;
 
     public InMemoryFizzBuzzRepository() {
         this.occurences = new ConcurrentHashMap<>();
     }
 
     @Override
-    public Optional<FizzbuzzRequestStatisticsEntity> findById(int hashCode) {
+    public Optional<FizzBuzzRequestStatistic> findById(int hashCode) {
         return Optional.ofNullable(occurences.get(hashCode));
     }
 
     @Override
-    public void save(FizzbuzzRequestStatisticsEntity fizzbuzzRequestStatisticsEntity) {
+    public void save(FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity) {
         int hashCode = fizzbuzzRequestStatisticsEntity.hashCode();
         occurences.remove(hashCode);
         occurences.put(hashCode, fizzbuzzRequestStatisticsEntity);
     }
 
     @Override
-    public Optional<FizzbuzzRequestStatisticsEntity> findMostCalled() {
+    public Optional<FizzBuzzRequestStatistic> findMostCalled() {
         if (occurences.isEmpty()) {
             log.info("empty map so returning an empty one");
             return Optional.empty();
         }
 
-        FizzbuzzRequestStatisticsEntity result = occurences.values().stream().findFirst().get();
+        FizzBuzzRequestStatistic result = occurences.values().stream().findFirst().get();
 
         // Not "stream" because much more easier to write/read/maintain than streams in my opinion
-        for (FizzbuzzRequestStatisticsEntity fizzbuzzRequestStatisticsEntity : occurences.values()) {
+        for (FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity : occurences.values()) {
             if (fizzbuzzRequestStatisticsEntity.getNbCalls() > result.getNbCalls()) {
                 result = fizzbuzzRequestStatisticsEntity;
             }

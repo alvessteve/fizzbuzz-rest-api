@@ -3,8 +3,6 @@ package com.training.fizzbuzz.service;
 import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 import com.training.fizzbuzz.repository.FizzBuzzRepository;
 import com.training.fizzbuzz.repository.InMemoryFizzBuzzRepositoryForTesting;
-import com.training.fizzbuzz.repository.entity.FizzbuzzRequestStatisticsEntity;
-import com.training.fizzbuzz.repository.mapper.FizzBuzzRequestStatisticEntityMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +44,7 @@ class FizzBuzzStatisticServiceTest {
 
         fizzBuzzStatisticService.increment(fizzBuzzRequestStatistic);
 
-        Optional<FizzbuzzRequestStatisticsEntity> fizzbuzzRequestStatisticsEntity = fizzBuzzRepository.findById(fizzBuzzRequestStatistic.hashCode());
+        Optional<FizzBuzzRequestStatistic> fizzbuzzRequestStatisticsEntity = fizzBuzzRepository.findById(fizzBuzzRequestStatistic.hashCode());
 
         Assertions.assertThat(fizzbuzzRequestStatisticsEntity.isPresent()).isTrue();
         Assertions.assertThat(fizzbuzzRequestStatisticsEntity.get().getNbCalls()).isEqualTo(1);
@@ -59,10 +57,10 @@ class FizzBuzzStatisticServiceTest {
                 .nbCalls(2)
                 .parameters(Collections.singletonMap("int1", "toto"))
                 .build();
-        fizzBuzzRepository.save(FizzBuzzRequestStatisticEntityMapper.toEntity(fizzBuzzRequestStatistic));
+        fizzBuzzRepository.save(fizzBuzzRequestStatistic);
         fizzBuzzStatisticService.increment(fizzBuzzRequestStatistic);
 
-        Optional<FizzbuzzRequestStatisticsEntity> fizzbuzzRequestStatisticsEntity = fizzBuzzRepository.findById(fizzBuzzRequestStatistic.hashCode());
+        Optional<FizzBuzzRequestStatistic> fizzbuzzRequestStatisticsEntity = fizzBuzzRepository.findById(fizzBuzzRequestStatistic.hashCode());
 
         Assertions.assertThat(fizzbuzzRequestStatisticsEntity.isPresent()).isTrue();
         Assertions.assertThat(fizzbuzzRequestStatisticsEntity.get().getNbCalls()).isEqualTo(3);

@@ -1,6 +1,6 @@
 package com.training.fizzbuzz.repository;
 
-import com.training.fizzbuzz.repository.entity.FizzbuzzRequestStatisticsEntity;
+import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,34 +13,34 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class InMemoryFizzBuzzRepositoryForTesting implements FizzBuzzRepository {
 
-    private Map<Integer, FizzbuzzRequestStatisticsEntity> occurences;
+    private Map<Integer, FizzBuzzRequestStatistic> occurences;
 
     public InMemoryFizzBuzzRepositoryForTesting() {
         this.occurences = new HashMap<>();
     }
 
     @Override
-    public Optional<FizzbuzzRequestStatisticsEntity> findById(int hashCode) {
+    public Optional<FizzBuzzRequestStatistic> findById(int hashCode) {
         return Optional.ofNullable(occurences.get(hashCode));
     }
 
     @Override
-    public void save(FizzbuzzRequestStatisticsEntity fizzbuzzRequestStatisticsEntity) {
+    public void save(FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity) {
         int hashCode = fizzbuzzRequestStatisticsEntity.hashCode();
         occurences.remove(hashCode);
         occurences.put(hashCode, fizzbuzzRequestStatisticsEntity);
     }
 
     @Override
-    public Optional<FizzbuzzRequestStatisticsEntity> findMostCalled() {
+    public Optional<FizzBuzzRequestStatistic> findMostCalled() {
         if (occurences.isEmpty()) {
             return Optional.empty();
         }
 
-        FizzbuzzRequestStatisticsEntity result = occurences.values().stream().findFirst().get();
+        FizzBuzzRequestStatistic result = occurences.values().stream().findFirst().get();
 
         // Not "java 8" but much more easier to write/read/maintain than streams
-        for (FizzbuzzRequestStatisticsEntity fizzbuzzRequestStatisticsEntity : occurences.values()) {
+        for (FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity : occurences.values()) {
             if (fizzbuzzRequestStatisticsEntity.getNbCalls() > result.getNbCalls()) {
                 result = fizzbuzzRequestStatisticsEntity;
             }
