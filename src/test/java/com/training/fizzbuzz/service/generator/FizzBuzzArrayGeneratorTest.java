@@ -1,6 +1,7 @@
 package com.training.fizzbuzz.service.generator;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
+import com.training.fizzbuzz.model.FizzBuzzElement;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -15,11 +16,27 @@ class FizzBuzzArrayGeneratorTest {
 
     @Test
     public void should_return_array() {
-        List<Object> result = List.of(1, 2, "fizz", 4, "buzz", "fizz", 7, 8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz", 16);
+        List<FizzBuzzElement<?>> elements = List.of(new FizzBuzzElement<>(1),
+                new FizzBuzzElement<>(2),
+                new FizzBuzzElement<>("fizz"),
+                new FizzBuzzElement<>(4),
+                new FizzBuzzElement<>("buzz") ,
+                new FizzBuzzElement<>("fizz") ,
+                new FizzBuzzElement<>(7) ,
+                new FizzBuzzElement<>(8) ,
+                new FizzBuzzElement<>("fizz") ,
+                new FizzBuzzElement<>("buzz") ,
+                new FizzBuzzElement<>(11) ,
+                new FizzBuzzElement<>("fizz") ,
+                new FizzBuzzElement<>(13) ,
+                new FizzBuzzElement<>(14) ,
+                new FizzBuzzElement<>("fizzbuzz") ,
+                new FizzBuzzElement<>(16)
+        );
 
         FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(3, 5, 16, "fizz", "buzz");
 
-        assertThat(fizzBuzzArray.result()).isEqualTo(result);
+        assertThat(fizzBuzzArray.elements()).hasSameElementsAs(elements);
     }
 
     @Test
@@ -42,7 +59,7 @@ class FizzBuzzArrayGeneratorTest {
     public void should_return_empty_array_if_limit_is_zero() {
         FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(3, 5, 0, "fizz", "buzz");
 
-        assertThat(fizzBuzzArray.result()).isEqualTo(Collections.emptyList());
+        assertThat(fizzBuzzArray.elements()).isEqualTo(Collections.emptyList());
     }
 
 }
