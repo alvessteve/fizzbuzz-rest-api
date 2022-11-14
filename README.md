@@ -33,10 +33,10 @@ Don’t forget to add unit tests.
 
 Please commit your project on Git and send me the url.
 
-## Contexte
+## Stack
 
-- Temps de réalisation: __6 heures__
-- stack: spring boot 2.5.3 / gradle / docker
+- java 17
+- spring boot 2.7.5 / gradle / docker + graalvm via Spring Native
 
 ## API
 

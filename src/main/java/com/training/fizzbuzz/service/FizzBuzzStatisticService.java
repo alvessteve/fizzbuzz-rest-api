@@ -20,11 +20,7 @@ public class FizzBuzzStatisticService {
 
     public FizzBuzzRequestStatistic mostRequested() {
         Optional<FizzBuzzRequestStatistic> optionalMostCalled = fizzBuzzRepository.findMostCalled();
-        if (optionalMostCalled.isPresent()) {
-            return optionalMostCalled.get();
-        } else {
-            return FizzBuzzRequestStatistic.empty();
-        }
+        return optionalMostCalled.orElseGet(FizzBuzzRequestStatistic::empty);
     }
 
     public void increment(FizzBuzzRequestStatistic fizzBuzzRequestStatistic) {

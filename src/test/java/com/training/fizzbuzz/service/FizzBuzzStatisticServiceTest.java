@@ -42,6 +42,7 @@ class FizzBuzzStatisticServiceTest {
                 .parameters(Collections.singletonMap("int1", "toto"))
                 .build();
 
+
         fizzBuzzStatisticService.increment(fizzBuzzRequestStatistic);
 
         Optional<FizzBuzzRequestStatistic> fizzbuzzRequestStatisticsEntity = fizzBuzzRepository.findById(fizzBuzzRequestStatistic.hashCode());

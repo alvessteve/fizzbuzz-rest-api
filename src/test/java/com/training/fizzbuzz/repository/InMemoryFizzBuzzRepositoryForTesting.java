@@ -37,16 +37,12 @@ public class InMemoryFizzBuzzRepositoryForTesting implements FizzBuzzRepository 
             return Optional.empty();
         }
 
-        FizzBuzzRequestStatistic result = occurences.values().stream().findFirst().get();
+        FizzBuzzRequestStatistic fizzBuzzRequestStatistic = occurences.values()
+                .stream()
+                .max(FizzBuzzRequestStatistic::compareTo)
+                .orElse(FizzBuzzRequestStatistic.empty());
 
-        // Not "java 8" but much more easier to write/read/maintain than streams
-        for (FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity : occurences.values()) {
-            if (fizzbuzzRequestStatisticsEntity.getNbCalls() > result.getNbCalls()) {
-                result = fizzbuzzRequestStatisticsEntity;
-            }
-        }
-
-        return Optional.ofNullable(result);
+        return Optional.of(fizzBuzzRequestStatistic);
     }
 
     @Override

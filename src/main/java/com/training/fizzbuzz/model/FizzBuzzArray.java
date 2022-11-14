@@ -1,10 +1,6 @@
 package com.training.fizzbuzz.model;
 
-import lombok.Value;
+import java.util.Collection;
 
-import java.util.List;
-
-@Value
-public class FizzBuzzArray {
-    List<Object> result;
+public record FizzBuzzArray(Collection<FizzBuzzElement<?>> elements) {
 }
