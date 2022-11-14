@@ -4,17 +4,17 @@ import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Repository
 public class InMemoryFizzBuzzRepository implements FizzBuzzRepository {
 
-    private ConcurrentHashMap<Integer, FizzBuzzRequestStatistic> occurences;
+    private HashMap<Integer, FizzBuzzRequestStatistic> occurences;
 
     public InMemoryFizzBuzzRepository() {
-        this.occurences = new ConcurrentHashMap<>();
+        this.occurences = new HashMap<>();
     }
 
     @Override
@@ -36,21 +36,17 @@ public class InMemoryFizzBuzzRepository implements FizzBuzzRepository {
             return Optional.empty();
         }
 
-        FizzBuzzRequestStatistic result = occurences.values().stream().findFirst().get();
+        FizzBuzzRequestStatistic fizzBuzzRequestStatistic = occurences.values()
+                .stream()
+                .max(FizzBuzzRequestStatistic::compareTo)
+                .orElse(FizzBuzzRequestStatistic.empty());
 
-        // Not "stream" because much more easier to write/read/maintain than streams in my opinion
-        for (FizzBuzzRequestStatistic fizzbuzzRequestStatisticsEntity : occurences.values()) {
-            if (fizzbuzzRequestStatisticsEntity.getNbCalls() > result.getNbCalls()) {
-                result = fizzbuzzRequestStatisticsEntity;
-            }
-        }
-
-        log.info("found " + result + " as the most requested endpoint");
-        return Optional.of(result);
+        log.info("found " + fizzBuzzRequestStatistic + " as the most requested endpoint");
+        return Optional.of(fizzBuzzRequestStatistic);
     }
 
     @Override
     public void clean() {
-        occurences = new ConcurrentHashMap<>();
+        occurences = new HashMap<>();
     }
 }

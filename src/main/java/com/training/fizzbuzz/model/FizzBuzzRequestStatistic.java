@@ -1,14 +1,12 @@
 package com.training.fizzbuzz.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Map;
-import java.util.Objects;
 
 @Data
 @Builder
-public class FizzBuzzRequestStatistic {
+public class FizzBuzzRequestStatistic implements Comparable<FizzBuzzRequestStatistic> {
     private String endpointName;
     private int nbCalls;
     private Map<String, String> parameters;
@@ -16,17 +14,12 @@ public class FizzBuzzRequestStatistic {
     public static FizzBuzzRequestStatistic empty() {
         return FizzBuzzRequestStatistic.builder().build();
     }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FizzBuzzRequestStatistic that = (FizzBuzzRequestStatistic) o;
-        return nbCalls == that.nbCalls && Objects.equals(endpointName, that.endpointName) && Objects.equals(parameters, that.parameters);
-    }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(endpointName, parameters);
+    public int compareTo(FizzBuzzRequestStatistic o) {
+        if(o.getNbCalls() == this.getNbCalls()) {
+            return 0;
+        }
+        return this.getNbCalls() > o.getNbCalls() ? 1 : -1;
     }
 }
