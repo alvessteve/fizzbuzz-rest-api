@@ -1,13 +1,9 @@
 package com.training.fizzbuzz.exception;
 
-import lombok.AllArgsConstructor;
+public class BadRequestException extends RuntimeException {
 
-@AllArgsConstructor
-public class BadRequestException {
-    private String errorMessage;
-
-    @Override
-    public String toString() {
-        return "{ \"errorMessage\": \"" + errorMessage + "\"}";
+    public BadRequestException(String message) {
+        super(message);
     }
+
 }
