@@ -45,6 +45,8 @@ Les endpoints sont:
 - /v1/fizzbuzz: renvoie un tableau
 - /v1/fizzbuzz/statistic: renvoie la requête la plus appelée
 
+> The project embarks the `springdoc-openapi-ui` dependency, so a swagger page is reachable at this page `http://localhost:8080/swagger-ui.html`.
+
 ## Install & run
 
 Build the project:
@@ -65,6 +67,7 @@ and then run:
 docker run -p 8080:8080 -it <name>
 ```
 
+
 ## Remarques
 
 - J'ai opté pour une architecture de code en couche "classique" et non du hexagonal car l'héxagone me paraissait "
@@ -80,5 +83,4 @@ docker run -p 8080:8080 -it <name>
   tests d'intégration et une autre pour le fonctionnement normal -).
 - Pas besoin d'authorisation ici. Nous pouvons mettre en place un rate limiting mais ceci doit être fait au niveau du
   WAF
-- Concernant la doc API (type Swagger and co), je suis un partisan du API-Design First :)
 - Bien sur, dans un contexte d'équipe, des profiles spring aurait été créé (dev et prod)
