@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.training'
-version = '0.0.2'
+version = '0.0.3'
 sourceCompatibility = '17'
 
 configurations {
@@ -25,6 +25,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

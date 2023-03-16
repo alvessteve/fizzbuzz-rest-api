@@ -25,7 +25,6 @@ public class FizzBuzzArrayGenerator {
         return new FizzBuzzArray(elements);
     }
 
-    //TODO: deport it on the controller side ?
     private void checkArguments(int int1, int int2) {
         if (int1 == 0 || int2 == 0) {
             log.error("[ERROR] int1 = " + int1 + " or int2 = " + int2 + " is null");
