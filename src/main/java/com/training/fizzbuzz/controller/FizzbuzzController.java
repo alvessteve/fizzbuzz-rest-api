@@ -2,6 +2,7 @@ package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
 import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
+import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
 import com.training.fizzbuzz.service.FizzBuzzStatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.springframework.validation.annotation.Validated;

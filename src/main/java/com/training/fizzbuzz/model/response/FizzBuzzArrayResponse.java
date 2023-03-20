@@ -1,4 +1,4 @@
-package com.training.fizzbuzz.controller;
+package com.training.fizzbuzz.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
