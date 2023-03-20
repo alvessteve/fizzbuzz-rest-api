@@ -34,6 +34,8 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok'
 
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    testImplementation 'io.rest-assured:xml-path:5.3.0' //use to prevent dependency conflicts on groovy-xml dep
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-core:4.8.0'
     testImplementation 'org.assertj:assertj-core:3.23.1'

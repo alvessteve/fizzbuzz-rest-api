@@ -29,13 +29,14 @@ public class FizzbuzzController {
     }
 
     @GetMapping
-    public FizzBuzzArray createList(
+    public FizzBuzzArrayResponse createList(
             @RequestParam @Min(1) Integer int1,
             @RequestParam @Min(1) Integer int2,
             @RequestParam @NotNull @Max(Integer.MAX_VALUE) Integer limit,
             @RequestParam @NotBlank String str1,
             @RequestParam @NotBlank String str2) {
-        return fizzBuzzArrayGenerator.generateFizzbuzzList(int1, int2, limit, str1, str2);
+        FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(int1, int2, limit, str1, str2);
+        return new FizzBuzzArrayResponse(fizzBuzzArray.toString());
     }
 
     @GetMapping("/statistic")
