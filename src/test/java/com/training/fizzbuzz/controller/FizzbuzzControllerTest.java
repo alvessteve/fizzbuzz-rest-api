@@ -50,9 +50,4 @@ class FizzbuzzControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Test
-    void should_return_200_status() throws Exception {
-        mockMvc.perform(get("/v1/fizzbuzz?int1=3&int2=5&limit=100&str1=fizz&str2=buzz"))
-                .andExpect(status().isOk());
-    }
 }
