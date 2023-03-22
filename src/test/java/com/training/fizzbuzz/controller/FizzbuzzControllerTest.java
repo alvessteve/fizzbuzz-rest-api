@@ -1,15 +1,18 @@
 package com.training.fizzbuzz.controller;
 
+import com.training.fizzbuzz.model.FizzBuzzArray;
 import com.training.fizzbuzz.service.FizzBuzzStatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,4 +53,11 @@ class FizzbuzzControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void should_return_200_status() throws Exception {
+        Mockito.when(fizzBuzzArrayGenerator.generateFizzbuzzList(3,5,100,"fizz", "buzz"))
+                .thenReturn(new FizzBuzzArray(EMPTY_LIST));
+        mockMvc.perform(get("/v1/fizzbuzz?int1=3&int2=5&limit=100&str1=fizz&str2=buzz"))
+                .andExpect(status().isOk());
+    }
 }
