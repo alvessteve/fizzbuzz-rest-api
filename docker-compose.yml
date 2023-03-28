@@ -2,5 +2,19 @@ version: '3.1'
 services:
   rest-service:
     image: fizzbuzz:0.0.2
+    depends_on:
+      - db
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/fizzbuzz
+      - SPRING_DATASOURCE_USERNAME=postgresuser
+      - SPRING_DATASOURCE_PASSWORD=postgrespwd
+
+  db:
+    image: 'postgres:15-alpine3.17'
+    container_name: postgresdb
+    environment:
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=postgrespwd
+
