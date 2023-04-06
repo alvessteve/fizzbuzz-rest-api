@@ -1,9 +1,7 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
-import com.training.fizzbuzz.model.FizzBuzzRequestStatistic;
 import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
-import com.training.fizzbuzz.service.FizzBuzzStatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +19,9 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/v1/fizzbuzz")
 public class FizzbuzzController {
 
-    private final FizzBuzzStatisticService fizzbuzzStatisticService;
     private final FizzBuzzArrayGenerator fizzBuzzArrayGenerator;
 
-    public FizzbuzzController(FizzBuzzStatisticService fizzbuzzStatisticService, FizzBuzzArrayGenerator fizzBuzzArrayGenerator) {
-        this.fizzbuzzStatisticService = fizzbuzzStatisticService;
+    public FizzbuzzController(FizzBuzzArrayGenerator fizzBuzzArrayGenerator) {
         this.fizzBuzzArrayGenerator = fizzBuzzArrayGenerator;
     }
 
@@ -41,7 +37,7 @@ public class FizzbuzzController {
     }
 
     @GetMapping("/statistic")
-    public FizzBuzzRequestStatistic getMostUsed() {
-        return fizzbuzzStatisticService.mostRequested();
+    public void getMostUsed() {
+        //To be implemented
     }
 }

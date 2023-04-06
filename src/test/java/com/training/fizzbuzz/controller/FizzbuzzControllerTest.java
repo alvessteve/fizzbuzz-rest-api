@@ -1,7 +1,6 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
-import com.training.fizzbuzz.service.FizzBuzzStatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,8 +25,6 @@ class FizzbuzzControllerTest {
     @MockBean
     private FizzBuzzArrayGenerator fizzBuzzArrayGenerator;
 
-    @MockBean
-    private FizzBuzzStatisticService fizzBuzzStatisticService;
 
     @Test
     void should_return_400_status_when_int1_parameter_invalid() throws Exception {
