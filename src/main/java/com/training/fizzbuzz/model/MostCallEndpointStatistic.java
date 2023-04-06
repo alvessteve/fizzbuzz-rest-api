@@ -7,4 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class MostCallEndpointStatistic {
     private Parameters parameters;
+
+    private int count;
 }
