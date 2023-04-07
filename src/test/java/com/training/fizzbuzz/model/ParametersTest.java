@@ -11,11 +11,11 @@ public class ParametersTest {
         var parameters = new Parameters(1,2,10,"st", "sto");
 
         assertThat(parameters).isNotNull();
-        assertThat(parameters.int1()).isEqualTo(1);
-        assertThat(parameters.int2()).isEqualTo(2);
-        assertThat(parameters.limit()).isEqualTo(10);
-        assertThat(parameters.str1()).isEqualTo("st");
-        assertThat(parameters.str2()).isEqualTo("sto");
+        assertThat(parameters.getInt1()).isEqualTo(1);
+        assertThat(parameters.getInt2()).isEqualTo(2);
+        assertThat(parameters.getLimit()).isEqualTo(10);
+        assertThat(parameters.getStr1()).isEqualTo("st");
+        assertThat(parameters.getStr2()).isEqualTo("sto");
     }
 
 }
