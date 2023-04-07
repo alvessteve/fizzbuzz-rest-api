@@ -1,6 +1,8 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
+import com.training.fizzbuzz.model.MostCallEndpointStatistic;
+import com.training.fizzbuzz.service.StatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +26,9 @@ class FizzbuzzControllerTest {
 
     @MockBean
     private FizzBuzzArrayGenerator fizzBuzzArrayGenerator;
+
+    @MockBean
+    private StatisticService statisticService;
 
 
     @Test
@@ -55,6 +60,14 @@ class FizzbuzzControllerTest {
         Mockito.when(fizzBuzzArrayGenerator.generateFizzbuzzList(3,5,100,"fizz", "buzz"))
                 .thenReturn(new FizzBuzzArray(EMPTY_LIST));
         mockMvc.perform(get("/v1/fizzbuzz?int1=3&int2=5&limit=100&str1=fizz&str2=buzz"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void should_return_200_status_with_most_called_endpoint() throws Exception {
+        Mockito.when(statisticService.findMostCalledEndpoint())
+                .thenReturn(new MostCallEndpointStatistic());
+        mockMvc.perform(get("/v1/fizzbuzz/statistic"))
                 .andExpect(status().isOk());
     }
 }

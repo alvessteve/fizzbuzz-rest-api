@@ -11,6 +11,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MostCallEndpointStatistic {
+
+    public MostCallEndpointStatistic(Parameters parameters, int count) {
+        this.parameters = parameters;
+        this.count = count;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

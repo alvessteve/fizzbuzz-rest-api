@@ -1,7 +1,10 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
+import com.training.fizzbuzz.model.MostCallEndpointStatistic;
 import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
+import com.training.fizzbuzz.model.response.MostCalledEndpointResponse;
+import com.training.fizzbuzz.service.StatisticService;
 import com.training.fizzbuzz.service.generator.FizzBuzzArrayGenerator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +24,11 @@ public class FizzbuzzController {
 
     private final FizzBuzzArrayGenerator fizzBuzzArrayGenerator;
 
-    public FizzbuzzController(FizzBuzzArrayGenerator fizzBuzzArrayGenerator) {
+    private final StatisticService statisticService;
+
+    public FizzbuzzController(FizzBuzzArrayGenerator fizzBuzzArrayGenerator, StatisticService statisticService) {
         this.fizzBuzzArrayGenerator = fizzBuzzArrayGenerator;
+        this.statisticService = statisticService;
     }
 
     @GetMapping
@@ -37,7 +43,8 @@ public class FizzbuzzController {
     }
 
     @GetMapping("/statistic")
-    public void getMostUsed() {
-        //To be implemented
+    public MostCalledEndpointResponse getMostUsed() {
+        MostCallEndpointStatistic mostCalledEndpoint = statisticService.findMostCalledEndpoint();
+        return new MostCalledEndpointResponse(mostCalledEndpoint);
     }
 }
