@@ -58,13 +58,13 @@ Build the project:
 Then the project can be dockerized
 
 ```shell
-docker build . -t <name>
+./gradlew bootBuildImage
 ```
 
 and then run:
 
 ```shell
-docker run -p 8080:8080 -it <name>
+docker-compose up
 ```
 
 
