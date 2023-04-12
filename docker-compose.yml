@@ -1,7 +1,8 @@
 version: '3.1'
 services:
   rest-service:
-    image: fizzbuzz:0.0.2
+    image: salvesblyt/fizzbuzz:0.0.3
+    container_name: fizzbuzz
     depends_on:
       - db
     ports:

@@ -90,6 +90,7 @@ bootBuildImage {
     environment = [
             "BP_NATIVE_IMAGE" : "true"
     ]
+    imageName = "salvesblyt/fizzbuzz:${version}"
     buildpacks = ["gcr.io/paketo-buildpacks/graalvm", "gcr.io/paketo-buildpacks/java-native-image"]
 }
 
