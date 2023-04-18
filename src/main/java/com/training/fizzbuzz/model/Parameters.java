@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Data
@@ -12,8 +13,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Parameters {
 
+    @Column(name = "first_integer")
     private int int1;
+    @Column(name = "second_integer")
     private int int2;
+    @Column(name = "max_limit")
     private int limit;
 
     private String str1;

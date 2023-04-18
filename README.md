@@ -55,10 +55,10 @@ Build the project:
 ./gradlew build
 ```
 
-Then the project can be dockerized
+The project can be dockerized via
 
 ```shell
-./gradlew bootBuildImage
+./gradlew clean bootBuildImage
 ```
 
 and then run:
@@ -67,20 +67,11 @@ and then run:
 docker-compose up
 ```
 
-
 ## Remarques
 
 - J'ai opté pour une architecture de code en couche "classique" et non du hexagonal car l'héxagone me paraissait "
-  overkill" pour le test puisque peu de code métier
-- Je n'ai pas visé les 100% de coverage UT, par manque de temps principalement. Ainsi, je me suis concentré plus sur la
-  diversité des UT que leur exhaustivité.
-- J'ai ajouté le plus de commentaires dans le code pour expliquer les choix.
-- Je n'ai pu faire des test d'intégration (en utilisant RestAssured) mais dans un contexte de mise en prod. Il aurait
-  été présent et intégré à la pipeline CI.
-- J'ai opté pour une implémentation "en mémoire" mano et non l'utilisation d'une base de données pour la persistence des
-  requêtes. Principalement, pour gagner du temps et je considérais que ce n'était ce qui était le plus porteur de valeur
-  dans le test (beaucoup de boilerplate: classe de configuration, client, docker-compose avec les 2 bases - 1 pour les
-  tests d'intégration et une autre pour le fonctionnement normal -).
+  overkill" pour le test puisque pas de code métier
+- Je me suis concentré plus sur la diversité des UT que leur exhaustivité.
 - Pas besoin d'authorisation ici. Nous pouvons mettre en place un rate limiting mais ceci doit être fait au niveau du
   WAF
 - Bien sur, dans un contexte d'équipe, des profiles spring aurait été créé (dev et prod)

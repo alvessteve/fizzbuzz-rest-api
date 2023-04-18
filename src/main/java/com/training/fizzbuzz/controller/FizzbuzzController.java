@@ -1,7 +1,7 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
-import com.training.fizzbuzz.model.MostCallEndpointStatistic;
+import com.training.fizzbuzz.model.StatisticEndpoint;
 import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
 import com.training.fizzbuzz.model.response.MostCalledEndpointResponse;
 import com.training.fizzbuzz.service.StatisticService;
@@ -44,7 +44,7 @@ public class FizzbuzzController {
 
     @GetMapping("/statistic")
     public MostCalledEndpointResponse getMostUsed() {
-        MostCallEndpointStatistic mostCalledEndpoint = statisticService.findMostCalledEndpoint();
+        StatisticEndpoint mostCalledEndpoint = statisticService.findMostCalledEndpoint();
         return new MostCalledEndpointResponse(mostCalledEndpoint);
     }
 }

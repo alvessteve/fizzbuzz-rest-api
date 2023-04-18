@@ -8,11 +8,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "statistic")
 @AllArgsConstructor
 @NoArgsConstructor
-public class MostCallEndpointStatistic {
+public class StatisticEndpoint {
 
-    public MostCallEndpointStatistic(Parameters parameters, int count) {
+    public StatisticEndpoint(Parameters parameters, int count) {
         this.parameters = parameters;
         this.count = count;
     }
@@ -24,5 +25,6 @@ public class MostCallEndpointStatistic {
     @Embedded
     private Parameters parameters;
 
+    @Column(name = "occurences")
     private int count;
 }

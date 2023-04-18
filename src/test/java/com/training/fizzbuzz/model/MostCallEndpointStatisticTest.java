@@ -9,7 +9,7 @@ public class MostCallEndpointStatisticTest {
     @Test
     void should_have_parameters() {
         var parameters = new Parameters(1,2,10,"st", "sto");
-        var mostCallEndpointStatistic = new MostCallEndpointStatistic(parameters, 0);
+        var mostCallEndpointStatistic = new StatisticEndpoint(parameters, 0);
 
         assertThat(mostCallEndpointStatistic.getParameters()).isNotNull();
         assertThat(mostCallEndpointStatistic.getParameters()).isEqualTo(parameters);
@@ -18,7 +18,7 @@ public class MostCallEndpointStatisticTest {
     @Test
     void should_have_count() {
         var parameters = new Parameters(1,2,10,"st", "sto");
-        var mostCallEndpointStatistic = new MostCallEndpointStatistic(parameters, 2);
+        var mostCallEndpointStatistic = new StatisticEndpoint(parameters, 2);
 
         assertThat(mostCallEndpointStatistic.getCount()).isEqualTo(2);
     }

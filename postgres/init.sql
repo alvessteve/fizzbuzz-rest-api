@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS fizzbuzz;
+CREATE DATABASE fizzbuzz;
