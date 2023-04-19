@@ -34,3 +34,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+###graalVM
+graalvm-ce-java17-22.3.1/

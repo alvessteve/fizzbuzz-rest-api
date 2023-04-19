@@ -78,27 +78,4 @@ flyway {
 
 check.dependsOn integrationTest
 
-//graalvmNative {
-//    binaries {
-//        main {
-//            javaLauncher = javaToolchains.launcherFor {
-//                languageVersion = JavaLanguageVersion.of(17)
-//                vendor = JvmVendorSpec.matching("GraalVM Community")
-//            }
-//        }
-//        all {
-//            resources.autodetect()
-//        }
-//    }
-//    toolchainDetection = false
-//}
-//
-//bootBuildImage {
-//    builder = "paketobuildpacks/builder:tiny"
-//    environment = [
-//            "BP_NATIVE_IMAGE" : "true"
-//    ]
-//    imageName = "salvesblyt/fizzbuzz:${version}"
-//    buildpacks = ["gcr.io/paketo-buildpacks/graalvm", "gcr.io/paketo-buildpacks/java-native-image"]
-//}
 

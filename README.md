@@ -36,7 +36,7 @@ Please commit your project on Git and send me the url.
 ## Stack
 
 - java 17
-- spring boot 2.7.5 / gradle / docker + graalvm via Spring Native
+- spring boot 3.0.5 / gradle / docker + graalvm 
 
 ## API
 
