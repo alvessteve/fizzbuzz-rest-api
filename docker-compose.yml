@@ -1,10 +1,12 @@
 version: '3.1'
 services:
   rest-service:
-    image: fizzbuzz:0.0.3
+    image: fizzbuzz:latest
     container_name: fizzbuzz
+    restart: on-failure
     depends_on:
-      - db
+      db:
+        condition: service_started
     ports:
       - "8080:8080"
 
@@ -18,4 +20,3 @@ services:
     environment:
       - POSTGRES_USER=postgresuser
       - POSTGRES_PASSWORD=postgrespwd
-
