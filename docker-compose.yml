@@ -1,23 +1,26 @@
 version: '3.1'
 services:
   rest-service:
-    image: salvesblyt/fizzbuzz:0.0.3
+    image: fizzbuzz:0.0.3
     container_name: fizzbuzz
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/fizzbuzz
-      - SPRING_DATASOURCE_USERNAME=postgresuser
-      - SPRING_DATASOURCE_PASSWORD=postgrespwd
 
   db:
-    image: 'postgres:15-alpine3.17'
+    image: 'postgres:14-alpine3.17'
     container_name: postgresdb
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_USER=postgresuser
       - POSTGRES_PASSWORD=postgrespwd
-
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 1s
+      retries: 2

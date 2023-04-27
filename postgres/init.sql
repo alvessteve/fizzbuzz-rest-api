@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS fizzbuzz;
+CREATE DATABASE fizzbuzz;
+CREATE USER flywayuser WITH PASSWORD 'flyway';
+GRANT USAGE ON SCHEMA public TO flywayuser;

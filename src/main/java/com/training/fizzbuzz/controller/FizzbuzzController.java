@@ -1,7 +1,7 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
-import com.training.fizzbuzz.model.MostCallEndpointStatistic;
+import com.training.fizzbuzz.model.StatisticEndpoint;
 import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
 import com.training.fizzbuzz.model.response.MostCalledEndpointResponse;
 import com.training.fizzbuzz.service.StatisticService;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @Validated
@@ -44,7 +44,7 @@ public class FizzbuzzController {
 
     @GetMapping("/statistic")
     public MostCalledEndpointResponse getMostUsed() {
-        MostCallEndpointStatistic mostCalledEndpoint = statisticService.findMostCalledEndpoint();
+        StatisticEndpoint mostCalledEndpoint = statisticService.findMostCalledEndpoint();
         return new MostCalledEndpointResponse(mostCalledEndpoint);
     }
 }
