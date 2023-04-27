@@ -1,6 +1,7 @@
 package com.training.fizzbuzz.service;
 
 import com.training.fizzbuzz.model.StatisticEndpoint;
+import com.training.fizzbuzz.repository.StatisticMapper;
 import com.training.fizzbuzz.repository.StatisticRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class StatisticService {
     }
 
     public StatisticEndpoint findMostCalledEndpoint() {
-        return statisticRepository.findFirstByOrderByCountDesc().orElse(new StatisticEndpoint());
+        return statisticRepository.findFirstByOrderByCountDesc()
+                .map(StatisticMapper::fromEntity)
+                .orElse(new StatisticEndpoint());
     }
 }

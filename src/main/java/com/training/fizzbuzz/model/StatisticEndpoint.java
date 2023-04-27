@@ -1,14 +1,12 @@
 package com.training.fizzbuzz.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Embedded;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name = "statistic")
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 public class StatisticEndpoint {
 
@@ -17,13 +15,8 @@ public class StatisticEndpoint {
         this.count = count;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Embedded
     private Parameters parameters;
 
-    @Column(name = "occurences")
     private int count;
 }
