@@ -5,7 +5,7 @@ services:
     container_name: fizzbuzz
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "8080:8080"
 
@@ -19,3 +19,8 @@ services:
     environment:
       - POSTGRES_USER=postgresuser
       - POSTGRES_PASSWORD=postgrespwd
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 1s
+      retries: 2
