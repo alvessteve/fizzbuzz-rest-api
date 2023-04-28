@@ -1,6 +1,7 @@
 package com.training.fizzbuzz.controller;
 
 import com.training.fizzbuzz.model.FizzBuzzArray;
+import com.training.fizzbuzz.model.Parameters;
 import com.training.fizzbuzz.model.StatisticEndpoint;
 import com.training.fizzbuzz.model.response.FizzBuzzArrayResponse;
 import com.training.fizzbuzz.model.response.MostCalledEndpointResponse;
@@ -38,6 +39,8 @@ public class FizzbuzzController {
             @RequestParam @NotNull @Max(Integer.MAX_VALUE) Integer limit,
             @RequestParam @NotBlank String str1,
             @RequestParam @NotBlank String str2) {
+        var statisticEndpoint = new StatisticEndpoint(new Parameters(int1, int2, limit, str1, str2), 1);
+        statisticService.saveStatisticParameters(statisticEndpoint);
         FizzBuzzArray fizzBuzzArray = fizzBuzzArrayGenerator.generateFizzbuzzList(int1, int2, limit, str1, str2);
         return new FizzBuzzArrayResponse(fizzBuzzArray.toString());
     }

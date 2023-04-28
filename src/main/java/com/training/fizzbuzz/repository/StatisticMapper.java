@@ -19,4 +19,17 @@ public class StatisticMapper {
                 .count(statisticEntity.getCount())
                 .build();
     }
+
+    public static StatisticEntity fromModelObject(StatisticEndpoint statisticEndpoint) {
+        var parameters = statisticEndpoint.getParameters();
+        var parametersEntity = new ParametersEntity(
+                parameters.getInt1(),
+                parameters.getInt2(),
+                parameters.getLimit(),
+                parameters.getStr1(),
+                parameters.getStr2()
+        );
+
+        return new StatisticEntity(0L, statisticEndpoint.getCount(), parametersEntity);
+    }
 }

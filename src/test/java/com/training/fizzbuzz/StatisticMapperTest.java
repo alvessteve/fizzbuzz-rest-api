@@ -1,5 +1,6 @@
 package com.training.fizzbuzz;
 
+import com.training.fizzbuzz.model.Parameters;
 import com.training.fizzbuzz.model.StatisticEndpoint;
 import com.training.fizzbuzz.repository.ParametersEntity;
 import com.training.fizzbuzz.repository.StatisticEntity;
@@ -31,6 +32,31 @@ class StatisticMapperTest {
                 () -> Assertions.assertEquals(100, statisticEndpoint.getParameters().getLimit()),
                 () -> Assertions.assertEquals("str1", statisticEndpoint.getParameters().getStr1()),
                 () -> Assertions.assertEquals("str2", statisticEndpoint.getParameters().getStr2())
+        );
+
+    }
+
+    @Test
+    void should_map_to_entity() {
+        Parameters parameters = new Parameters();
+        parameters.setInt1(1);
+        parameters.setInt2(2);
+        parameters.setLimit(100);
+        parameters.setStr1("str1");
+        parameters.setStr2("str2");
+        StatisticEndpoint statisticEndpoint = new StatisticEndpoint();
+        statisticEndpoint.setParameters(parameters);
+        statisticEndpoint.setCount(1);
+
+        StatisticEntity statisticEntity = StatisticMapper.fromModelObject(statisticEndpoint);
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(1, statisticEntity.getCount()),
+                () -> Assertions.assertEquals(1, statisticEntity.getParameters().getInt1()),
+                () -> Assertions.assertEquals(2, statisticEntity.getParameters().getInt2()),
+                () -> Assertions.assertEquals(100, statisticEntity.getParameters().getLimit()),
+                () -> Assertions.assertEquals("str1", statisticEntity.getParameters().getStr1()),
+                () -> Assertions.assertEquals("str2", statisticEntity.getParameters().getStr2())
         );
 
     }

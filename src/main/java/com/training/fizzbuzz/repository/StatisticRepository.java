@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface StatisticRepository extends JpaRepository<StatisticEntity, Long> {
     @Query("SELECT MAX(count),parameters FROM StatisticEntity GROUP BY parameters")
     public Optional<StatisticEntity> findFirstByOrderByCountDesc();
+
+    public Optional<StatisticEntity> findStatisticEntityByCountAndParameters(int count, ParametersEntity parameters);
 }

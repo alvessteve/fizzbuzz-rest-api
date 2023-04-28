@@ -1,5 +1,5 @@
 CREATE TABLE statistic (
-    id serial PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     occurences SMALLINT,
     first_integer SMALLINT,
     second_integer SMALLINT,
