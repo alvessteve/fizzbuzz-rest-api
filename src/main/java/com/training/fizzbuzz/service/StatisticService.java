@@ -26,7 +26,7 @@ public class StatisticService {
 
     public void saveStatisticParameters(StatisticEndpoint statisticEndpoint){
         var incomingStastisticEntity = StatisticMapper.fromModelObject(statisticEndpoint);
-        Optional<StatisticEntity> optionalExistingStatisticEntity = statisticRepository.findStatisticEntityByCountAndParameters(statisticEndpoint.getCount(), incomingStastisticEntity.getParameters());
+        Optional<StatisticEntity> optionalExistingStatisticEntity = statisticRepository.findStatisticEntityByParameters(incomingStastisticEntity.getParameters());
         optionalExistingStatisticEntity.ifPresent(StatisticEntity::increment);
         statisticRepository.save(optionalExistingStatisticEntity.orElse(incomingStastisticEntity));
     }
