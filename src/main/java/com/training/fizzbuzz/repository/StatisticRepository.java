@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface StatisticRepository extends JpaRepository<StatisticEntity, Long> {
-    @Query("SELECT MAX(count),parameters FROM StatisticEntity GROUP BY parameters")
-    public Optional<StatisticEntity> findFirstByOrderByCountDesc();
+    @Query("SELECT new StatisticEntity(id, MAX(count), parameters) FROM StatisticEntity GROUP BY parameters, id ORDER BY count DESC LIMIT 1")
+    public Optional<StatisticEntity> findMostCalled();
 
     public Optional<StatisticEntity> findStatisticEntityByCountAndParameters(int count, ParametersEntity parameters);
 }

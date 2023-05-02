@@ -19,7 +19,7 @@ public class StatisticService {
     }
 
     public StatisticEndpoint findMostCalledEndpoint() {
-        return statisticRepository.findFirstByOrderByCountDesc()
+        return statisticRepository.findMostCalled()
                 .map(StatisticMapper::fromEntity)
                 .orElse(new StatisticEndpoint());
     }
