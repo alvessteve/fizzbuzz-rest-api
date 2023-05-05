@@ -56,6 +56,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-core:4.8.0'
     testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation "org.testcontainers:testcontainers:1.18.0"
+    testImplementation "org.testcontainers:junit-jupiter:1.18.0"
+    testImplementation "org.testcontainers:postgresql:1.18.0"
+    testImplementation 'org.postgresql:postgresql'
 }
 
 test {
@@ -66,15 +70,13 @@ tasks.withType(Jar) {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 }
 
+tasks.withType(Copy).all {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
 task integrationTest(type: Test) {
     testClassesDirs = sourceSets.integration.output.classesDirs
     classpath = sourceSets.integration.runtimeClasspath
-}
-
-flyway {
-    url = 'jdbc:postgresql://localhost:5432/fizzbuzz'
-    user = 'postgresuser'
-    password = 'postgrespwd'
 }
 
 check.dependsOn integrationTest

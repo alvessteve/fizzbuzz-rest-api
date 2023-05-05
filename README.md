@@ -75,3 +75,11 @@ docker-compose up
 - Pas besoin d'authorisation ici. Nous pouvons mettre en place un rate limiting mais ceci doit être fait au niveau du
   WAF
 - Bien sur, dans un contexte d'équipe, des profiles spring aurait été créé (dev et prod)
+
+## Misc
+
+On MacOS 12.6, docker does not create docker.sock file, preventing docker to run smoothly: in that case please do:
+
+```shell
+sudo ln -s "$HOME/.docker/run/docker.sock" /var/run/docker.sock
+```

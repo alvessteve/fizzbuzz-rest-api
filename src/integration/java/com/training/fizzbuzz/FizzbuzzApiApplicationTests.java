@@ -5,11 +5,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.TestPropertySource;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.utility.MountableFile;
 
 import static io.restassured.RestAssured.get;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:application-test.properties")
 class FizzbuzzApiApplicationTests {
 
 	@LocalServerPort
@@ -17,6 +24,22 @@ class FizzbuzzApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+	}
+
+	@Container
+	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14.7")
+			.withCopyFileToContainer(MountableFile.forHostPath("./postgres/init.sql"), "/docker-entrypoint-initdb.d/init.sql")
+			.withExposedPorts(5432);
+
+	static {
+		postgres.start();
+	}
+
+	@DynamicPropertySource
+	static void props(DynamicPropertyRegistry registry) {
+		registry.add("spring.datasource.url", postgres::getJdbcUrl);
+		registry.add("spring.datasource.username", postgres::getUsername);
+		registry.add("spring.datasource.password", postgres::getPassword);
 	}
 
 	@BeforeEach
