@@ -53,13 +53,13 @@ dependencies {
 
     integrationImplementation 'io.rest-assured:rest-assured:5.3.0'
     integrationImplementation 'io.rest-assured:xml-path:5.3.0' //use to prevent dependency conflicts on groovy-xml dep
+    integrationImplementation "org.testcontainers:junit-jupiter:1.18.0"
+    integrationImplementation "org.testcontainers:testcontainers:1.18.0"
+    integrationImplementation "org.testcontainers:postgresql:1.18.0"
+    integrationImplementation 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-core:4.8.0'
     testImplementation 'org.assertj:assertj-core:3.23.1'
-    testImplementation "org.testcontainers:testcontainers:1.18.0"
-    testImplementation "org.testcontainers:junit-jupiter:1.18.0"
-    testImplementation "org.testcontainers:postgresql:1.18.0"
-    testImplementation 'org.postgresql:postgresql'
 }
 
 test {
@@ -75,6 +75,7 @@ tasks.withType(Copy).all {
 }
 
 task integrationTest(type: Test) {
+    useJUnitPlatform()
     testClassesDirs = sourceSets.integration.output.classesDirs
     classpath = sourceSets.integration.runtimeClasspath
 }
