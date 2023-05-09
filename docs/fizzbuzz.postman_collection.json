@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "e9c9861c-39d6-414f-9230-26aadc9ab686",
+		"name": "fizzbuzz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "array of elements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/fizzbuzz?int1=3&int2=5&limit=100&str1=fizz&str2=buzz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "3"
+						},
+						{
+							"key": "int2",
+							"value": "5"
+						},
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "array of elements wrong param",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/fizzbuzz?int1=0&int2=5&limit=100&str1=fizz&str2=buzz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "0"
+						},
+						{
+							"key": "int2",
+							"value": "5"
+						},
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statistics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v1/fizzbuzz/statistic",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"fizzbuzz",
+						"statistic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metrics",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
