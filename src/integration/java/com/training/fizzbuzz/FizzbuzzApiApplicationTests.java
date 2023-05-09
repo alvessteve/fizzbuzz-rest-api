@@ -58,6 +58,29 @@ class FizzbuzzApiApplicationTests {
 	}
 
 	@Test
+	void should_return_statistic() {
+
+		for(int i = 0; i < 5; i++){
+			get("/v1/fizzbuzz?int1=3&int2=5&limit=10&str1=fizz&str2=buzz")
+					.then()
+					.statusCode(200)
+					.assertThat()
+					.body("elements", equalTo("[1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz]"));
+		}
+
+		get("/v1/fizzbuzz/statistic")
+				.then()
+				.statusCode(200)
+				.assertThat()
+				.body("endpoint.count", equalTo(5))
+				.body("endpoint.parameters.int1", equalTo(3))
+				.body("endpoint.parameters.int2", equalTo(5))
+				.body("endpoint.parameters.limit", equalTo(10))
+				.body("endpoint.parameters.str1", equalTo("fizz"))
+				.body("endpoint.parameters.str2", equalTo("buzz"));
+	}
+
+	@Test
 	void should_return_400_for_wrong_parameters() {
 		get("/v1/fizzbuzz?int1=0&int2=5&limit=16&str1=fizz&str2=buzz")
 				.then()
